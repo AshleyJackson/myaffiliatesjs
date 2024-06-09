@@ -1,9 +1,10 @@
 {
   "name": "myaffiliatesjs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "scripts": {
-    "dev": "nodemon tests/tests",
-    "build": "tsup src/index.ts --watch"
+    "tests": "nodemon tests/tests",
+    "dev": "tsup src/index.ts --watch",
+    "build": "tsup src/index.ts"
   },
   "author": "AshleyJackson",
   "repository": {

@@ -30,7 +30,10 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
-  decode_token: () => decode_token
+  decode_token: () => decode_token,
+  get_affiliate_earnings: () => get_affiliate_earnings,
+  get_user_status: () => get_user_status,
+  view_campaigns: () => view_campaigns
 });
 module.exports = __toCommonJS(src_exports);
 var import_axios = __toESM(require("axios"));
@@ -47,7 +50,46 @@ async function decode_token(baseUrl, token, username, password) {
   const token_data = parsed_xml.TOKENS.children;
   return token_data;
 }
+async function get_user_status(baseUrl, username, password, user_id) {
+  const request = await import_axios.default.get(`${baseUrl}/feeds.php?FEED_ID=3&USER_IDS=${user_id}`, {
+    auth: {
+      username,
+      password
+    }
+  });
+  const response = request.data;
+  const parsed_xml = (0, import_simple_xml_to_json.convertXML)(response);
+  const user_status = parsed_xml;
+  return user_status;
+}
+async function view_campaigns(baseUrl, username, password, date_from, date_to) {
+  const request = await import_axios.default.get(`${baseUrl}/feeds.php?FEED_ID=17&CREATED_DATE_FROM=${date_from.toISOString()}&CREATED_DATE_TO=${date_to.toISOString()}`, {
+    auth: {
+      username,
+      password
+    }
+  });
+  const response = request.data;
+  const parsed_xml = (0, import_simple_xml_to_json.convertXML)(response);
+  const campaigns = parsed_xml.CAMPAIGNS.children;
+  return campaigns;
+}
+async function get_affiliate_earnings(baseUrl, username, password, USER_ID, date_from, date_to) {
+  const request = await import_axios.default.get(`${baseUrl}/feeds.php?FEED_ID=25&USER_ID=${USER_ID}&FROM_DATE=${date_from.toISOString()}&TO_DATE=${date_to.toISOString()}`, {
+    auth: {
+      username,
+      password
+    }
+  });
+  const response = request.data;
+  const parsed_xml = (0, import_simple_xml_to_json.convertXML)(response);
+  const affiliate_earnings = parsed_xml;
+  return affiliate_earnings;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
-  decode_token
+  decode_token,
+  get_affiliate_earnings,
+  get_user_status,
+  view_campaigns
 });
