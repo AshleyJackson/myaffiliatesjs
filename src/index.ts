@@ -1,5 +1,5 @@
 import axios from "axios";
-import type { Tokens, TOKENSChild } from './tokens';
+import { Creds, Token } from './types';
 import { convertXML } from 'simple-xml-to-json';
 import { UserStatus } from "./users";
 
@@ -16,17 +16,29 @@ import { UserStatus } from "./users";
  * @param password 
  * @returns <TOKENSChild[]>
  */
-export async function decode_token(baseUrl: string, token: string, username: string, password: string): Promise<TOKENSChild[]> {
-  const request = await axios.get(`${baseUrl}/feeds.php?FEED_ID=4&TOKENS=${token}`, {
+export async function decode_token(data: Creds): Promise<Token> {
+  const request = await axios.get(`${data.baseUrl}/feeds.php?FEED_ID=4&TOKENS=${data.token}`, {
     auth: {
-      username: username,
-      password: password
+      username: data.username,
+      password: data.password
     }
   });
-  const response = request.data;
-  const parsed_xml: Tokens = convertXML(response);
-  const token_data = parsed_xml.TOKENS.children
-  return token_data
+  let token: Token = {
+    prefix: "",
+    user_id: "",
+    setup_id: "",
+    plan_id: "",
+    media_id: "",
+    banner_id: "",
+    campaign_id: "",
+    authcode: "",
+    referring_url: "",
+    ip_address: "",
+    country: "",
+    time_stamp: new Date()
+  }
+  return data
+
 }
 
 /**
