@@ -1,72 +1,15 @@
 import axios from "axios";
 import { Creds, Token } from './types';
 import { convertXML } from 'simple-xml-to-json';
-import { UserStatus } from "./users";
+import { decode_token } from "./tokens";
+import { get_user } from "./users";
 
-/**
- * @example 
- * const baseUrl = "";
- * const username = "";
- * const password = "";
- * 
- * @description This allows you to specify a token and decode them and output the details pertaining to the details within the token.
- * @param baseUrl 
- * @param token 
- * @param username 
- * @param password 
- * @returns <TOKENSChild[]>
- */
-export async function decode_token(data: Creds): Promise<Token> {
-  const request = await axios.get(`${data.baseUrl}/feeds.php?FEED_ID=4&TOKENS=${data.token}`, {
-    auth: {
-      username: data.username,
-      password: data.password
-    }
-  });
-  let token: Token = {
-    prefix: "",
-    user_id: "",
-    setup_id: "",
-    plan_id: "",
-    media_id: "",
-    banner_id: "",
-    campaign_id: "",
-    authcode: "",
-    referring_url: "",
-    ip_address: "",
-    country: "",
-    time_stamp: new Date()
-  }
-  return data
 
+export default {
+  decode_token,
+  get_user,
 }
 
-/**
- * @example 
- * const baseUrl = "";
- * const username = "";
- * const password = "";
- * const token = "";
- *
- * @description This feed outputs the status of a selected list of users. It can also optionally update the status of those users.
- * @param baseUrl 
- * @param token 
- * @param username 
- * @param password 
- * @returns <UserStatus>
- */
-export async function get_user_status(baseUrl: string, username: string, password: string, user_id: number): Promise<UserStatus> {
-  const request = await axios.get(`${baseUrl}/feeds.php?FEED_ID=3&USER_IDS=${user_id}`, {
-    auth: {
-      username: username,
-      password: password
-    }
-  });
-  const response = request.data;
-  const parsed_xml: UserStatus = convertXML(response);
-  const user_status = parsed_xml
-  return user_status
-}
 
 /**
  * @example 

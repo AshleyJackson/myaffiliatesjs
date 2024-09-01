@@ -2,7 +2,7 @@
   "name": "myaffiliatesjs",
   "version": "1.1.0",
   "scripts": {
-    "tests": "nodemon tests/tests",
+    "tests": "tsx test.ts",
     "dev": "tsup src/index.ts --watch",
     "build": "tsup src/index.ts"
   },
@@ -40,5 +40,8 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
   }
 }
