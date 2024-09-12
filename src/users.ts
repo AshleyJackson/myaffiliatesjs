@@ -1,19 +1,14 @@
 import { convertXML } from "simple-xml-to-json";
-import { Creds, User } from "./types";
-import axios from "axios";
+import { createClient } from "./common";
+const axios = createClient()
 
-export async function get_user(creds: Creds, date_from: Date, date_to: Date): Promise<User> {
-  const request = await axios.get(`${creds.baseUrl}/feeds.php?FEED_ID=17&CREATED_DATE_FROM=${date_from.toISOString()}&CREATED_DATE_TO=${date_to.toISOString()}`, {
-    auth: {
-      username: creds.username,
-      password: creds.password
-    }
-  });
+export async function get_user(date_from: Date, date_to: Date): Promise<User> {
+  const user = await axios.get(`/feeds.php?FEED_ID=17&CREATED_DATE_FROM=${date_from.toISOString()}&CREATED_DATE_TO=${date_to.toISOString()}`)
   let output: User
-  const data = convertXML(request.data)
+  const data = convertXML(user.data)
 
   // TODO: Rebuild this section to work with multiple users.
-  // NOTE: This section will not work currently lmao.
+  // NOTE: This section should not work currently lmao.
   output = {
     id: data.USERS.children[0].USER.ID,
     username: data.USERS.children[0].USER.children[0].USERNAME.content,
@@ -51,4 +46,58 @@ export async function get_user(creds: Creds, date_from: Date, date_to: Date): Pr
     ],
   }
   return output
+}
+
+
+
+export interface User {
+  id: string;
+  username: string;
+  parent_id: string;
+  parent_username: string;
+  admin_id?: string;
+  admin_username?: string;
+  email: string;
+  country?: string;
+  status: string;
+  join_date: Date;
+  currency: string;
+  balance: string;
+  payment_type: string;
+  minimum_payment: string;
+  language: string;
+  user_comments?: {
+    comment: string;
+    date: Date;
+  },
+  user_tags?: string;
+  // user_campaigns?: {
+  //   campaign_id: string;
+  //   description: string;
+  // }[];
+  // user_variables?: {
+  //   name: string;
+  //   value: string;
+  // }[];
+  // user_details?: {},
+  // subscriptions?: {
+  //   plan_name: string;
+  //   description?: string;
+  //   billing_display?: string;
+  //   plan_id: string;
+  //   customer_group: string;
+  //   discard_negative_earnings: string;
+  //   start_date: Date;
+  // }[];
+  subscription_variables: {
+    name: string;
+    value: string;
+    plan_id: string;
+    customer_group: string;
+    date: Date;
+  }[];
+  // user_payment_details: {
+  //   name: string;
+  //   id: string;
+  // }[];
 }

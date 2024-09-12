@@ -1,11 +1,12 @@
 import fs from "fs";
 import { convertXML } from "simple-xml-to-json";
-import { Creds, Token } from "../src/types";
+import { createClient } from "./common";
+const axios = createClient()
 
-export async function decode_token(creds: Creds): Promise<Token> {
-  const token_response = fs.readFileSync('./tests/token.xml', 'utf8').toString();
+export async function decode_token(token: string): Promise<Token> {
+  const request = await axios.get(`/feeds.php?FEED_ID=4&TOKENS=${token}`)
   let output: Token
-  const data = convertXML(token_response)
+  const data = convertXML(request.data)
   output = {
     prefix: data.TOKENS.children[0].TOKEN.PREFIX,
     user_id: data.TOKENS.children[0].TOKEN.USER_ID,
@@ -36,3 +37,35 @@ export async function decode_token(creds: Creds): Promise<Token> {
   return output
 }
 
+
+interface Token {
+  prefix: string;
+  user_id: string;
+  setup_id: string;
+  media_id: string;
+  banner_id: string;
+  campaign_id: string;
+  authcode: string;
+  referring_url: string;
+  ip_address: string;
+  country: string;
+  time_stamp: Date;
+  user?: TokenUser; // Not sure off the top of my head if User is always available
+  setup?: TokenSetup; // Not sure off the top of my head if Setup is always available
+}
+
+interface TokenUser {
+  user_name: string;
+  status: string;
+}
+
+interface TokenSetup {
+  site_id: string;
+  site_name: string;
+  site_url: string;
+  operation_id: string;
+  plan_id: string;
+  object_id: string;
+  object_description: string;
+  object_url: string;
+}
