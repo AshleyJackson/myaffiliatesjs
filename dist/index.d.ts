@@ -60,9 +60,12 @@ interface User {
     }[];
 }
 
+declare function validate_email(email: string): Promise<string>;
+
 declare const _default: {
     decode_token: typeof decode_token;
     get_user: typeof get_user;
+    validate_email: typeof validate_email;
 };
 
 export { _default as default };

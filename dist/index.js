@@ -141,8 +141,16 @@ async function get_user(date_from, date_to) {
   return output;
 }
 
+// src/email.ts
+var import_axios2 = __toESM(require("axios"));
+async function validate_email(email) {
+  const response = await import_axios2.default.get(`https://api.ashleyjackson.net/email/validate/${email}`);
+  return response.data;
+}
+
 // src/index.ts
 var src_default = {
   decode_token,
-  get_user
+  get_user,
+  validate_email
 };
