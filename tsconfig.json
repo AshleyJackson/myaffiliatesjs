@@ -2,8 +2,8 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-    "moduleResolution": "NodeNext",
-    "module": "NodeNext",
+    "moduleResolution": "Bundler",
+    "module": "ES2020",
     "strict": true,
     "declaration": true,
     "noImplicitAny": true,

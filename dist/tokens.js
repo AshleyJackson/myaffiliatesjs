@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.decode_token = decode_token;
-const simple_xml_to_json_1 = require("simple-xml-to-json");
-const common_1 = require("./common");
-const axios = (0, common_1.createClient)();
-async function decode_token(token) {
+import { convertXML } from "simple-xml-to-json";
+import { createClient } from "./common";
+const axios = createClient();
+export async function decode_token(token) {
     const request = await axios.get(`/feeds.php?FEED_ID=4&TOKENS=${token}`);
     let output;
-    const data = (0, simple_xml_to_json_1.convertXML)(request.data);
+    const data = convertXML(request.data);
     output = {
         prefix: data.TOKENS.children[0].TOKEN.PREFIX,
         user_id: data.TOKENS.children[0].TOKEN.USER_ID,

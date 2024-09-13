@@ -1,12 +1,6 @@
-"use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.createClient = void 0;
-const axios_1 = __importDefault(require("axios"));
-const dotenv_1 = require("dotenv");
-(0, dotenv_1.config)();
+import axios from 'axios';
+import { config } from "dotenv";
+config();
 const creds = {
     baseUrl: process.env.BASE_URL,
     username: process.env.USERNAME,
@@ -15,8 +9,8 @@ const creds = {
 if (!creds.baseUrl || !creds.username || !creds.password) {
     throw new Error('Please provide a BASE_URL, USERNAME, and PASSWORD in your .env file.');
 }
-const createClient = () => {
-    return axios_1.default.create({
+export const createClient = () => {
+    return axios.create({
         baseURL: creds.baseUrl,
         auth: {
             username: creds.username,
@@ -24,4 +18,3 @@ const createClient = () => {
         }
     });
 };
-exports.createClient = createClient;

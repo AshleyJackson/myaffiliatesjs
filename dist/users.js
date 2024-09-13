@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.get_user = get_user;
-const simple_xml_to_json_1 = require("simple-xml-to-json");
-const common_1 = require("./common");
-const axios = (0, common_1.createClient)();
-async function get_user(date_from, date_to) {
+import { convertXML } from "simple-xml-to-json";
+import { createClient } from "./common";
+const axios = createClient();
+export async function get_user(date_from, date_to) {
     const user = await axios.get(`/feeds.php?FEED_ID=17&CREATED_DATE_FROM=${date_from.toISOString()}&CREATED_DATE_TO=${date_to.toISOString()}`);
     let output;
-    const data = (0, simple_xml_to_json_1.convertXML)(user.data);
+    const data = convertXML(user.data);
     // TODO: Rebuild this section to work with multiple users.
     // NOTE: This section should not work currently lmao.
     output = {

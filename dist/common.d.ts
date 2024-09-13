@@ -1,2 +1,1 @@
-import axios from 'axios';
-export declare const createClient: () => axios.AxiosInstance;
+export declare const createClient: () => import("axios").AxiosInstance;

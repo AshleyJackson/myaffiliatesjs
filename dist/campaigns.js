@@ -1,9 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.view_campaigns = view_campaigns;
-const simple_xml_to_json_1 = require("simple-xml-to-json");
-const common_1 = require("./common");
-const axios = (0, common_1.createClient)();
+import { convertXML } from "simple-xml-to-json";
+import { createClient } from "./common";
+const axios = createClient();
 /**
  * @example
  * const baseUrl = "";
@@ -20,7 +17,7 @@ const axios = (0, common_1.createClient)();
  * @param date_to
  * @returns <any>
  */
-async function view_campaigns(baseUrl, username, password, date_from, date_to) {
+export async function view_campaigns(baseUrl, username, password, date_from, date_to) {
     const request = await axios.get(`${baseUrl}/feeds.php?FEED_ID=17&CREATED_DATE_FROM=${date_from.toISOString()}&CREATED_DATE_TO=${date_to.toISOString()}`, {
         auth: {
             username: username,
@@ -28,7 +25,7 @@ async function view_campaigns(baseUrl, username, password, date_from, date_to) {
         }
     });
     const response = request.data;
-    const parsed_xml = (0, simple_xml_to_json_1.convertXML)(response);
+    const parsed_xml = convertXML(response);
     const campaigns = parsed_xml.CAMPAIGNS.children;
     return campaigns;
 }
