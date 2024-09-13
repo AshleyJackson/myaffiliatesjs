@@ -1,9 +1,14 @@
 {
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"],
   "compilerOptions": {
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
     "strict": true,
-    // "target": "esnext",
+    "declaration": true,
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "target": "esnext",
     // "module": "esnext",
     // "moduleResolution": "node",
     // "strict": true,
@@ -22,7 +27,5 @@
     // "paths": {
     //   "@/*": ["/.src/*"]
     // }
-  },
-  // "include": ["src/**/*"],
-  // "exclude": ["node_modules", "dist"]
+  }
 }

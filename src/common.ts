@@ -9,7 +9,7 @@ const creds = {
 }
 
 if (!creds.baseUrl || !creds.username || !creds.password) {
-  throw new Error('Missing credentials in .env file');
+  throw new Error('Please provide a BASE_URL, USERNAME, and PASSWORD in your .env file.')
 }
 
 export const createClient = () => {
