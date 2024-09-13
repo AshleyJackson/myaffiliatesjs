@@ -1,10 +1,9 @@
 {
   "name": "myaffiliatesjs",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "scripts": {
-    "tests": "nodemon tests/tests",
-    "dev": "tsup src/index.ts --watch",
-    "build": "tsup src/index.ts"
+    "tsc": "tsc -p tsconfig.json",
+    "preview": "bun tsc && bun tests"
   },
   "author": "AshleyJackson",
   "repository": {
@@ -20,25 +19,28 @@
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "types": "./dist/index.d.ts"
     }
   },
   "tsup": {
     "dts": true,
     "minify": false,
     "format": [
-      "cjs",
-      "esm"
+      "cjs"
     ],
     "clean": true
   },
   "dependencies": {
     "@types/node": "^20.14.2",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "nodemon": "^3.1.3",
     "simple-xml-to-json": "^1.2.2",
     "ts-node": "^10.9.2",
     "tsup": "^8.1.0",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0"
   }
 }
