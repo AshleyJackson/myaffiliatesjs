@@ -1,6 +1,6 @@
 {
   "name": "myaffiliatesjs",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "scripts": {
     "tsc": "tsc -p tsconfig.json",
     "tests": "tsx test.ts",
