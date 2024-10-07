@@ -25,10 +25,9 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Documentation
 - [ ] Email Matchup
   - [ ] Documentation
-- [ ] Email Validation :eyes: Use my own internal API tool
+- [x] Email Validation
   - [ ] Documentation
-  - [ ] NOTE: This only checks if the Email address represents a real email. It does no MX or SMTP based lookups.
-- [ ] Player Creation
+- [ ] Player Creation A.K.A (Customer Feed)
   - [ ] Documentation
 - [ ] Player Search
   - [ ] Documentation
@@ -40,13 +39,13 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Offline Code
   - [ ] Full Details
   - [ ] Documentation
-- [ ] Creat and Patch Media
+- [ ] Create and Patch Media
   - [ ] Documentation
   - [ ] Create
   - [ ] Update
 - [ ] Get Current Campaigns
   - [ ] Documentation
-- [ ] Get Media Details
+- [x] Get Media Details
   - [ ] Documentation
 - [ ] View Remapped Players
   - [ ] Documentation
