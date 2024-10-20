@@ -17,3 +17,6 @@
  * @returns Promise<any>
  */
 export declare function get_affiliate_earnings(baseUrl: string, username: string, password: string, USER_ID: number, date_from: Date, date_to: Date): Promise<any>;
+type affiliate_account_type = '' | 'shell';
+export declare function create_affiliate(account_type: affiliate_account_type, username: string, password: string, email: string, plan_force: string, plans: string, country?: string, referrer_token?: string): Promise<any>;
+export {};

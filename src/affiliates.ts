@@ -32,3 +32,41 @@ export async function get_affiliate_earnings(baseUrl: string, username: string, 
   const affiliate_earnings = parsed_xml
   return affiliate_earnings
 }
+
+type affiliate_account_type = '' | 'shell'
+type create_affiliate_params = {
+  FEED_ID: number,
+  account_type: affiliate_account_type,
+  username: string,
+  password: string,
+  email: string,
+  country?: string,
+  referrer_token?: string,
+  plans: string,
+  plan_force: string
+}
+type create_affiliate_output = {
+
+}
+
+export async function create_affiliate(account_type: affiliate_account_type, username: string, password: string, email: string, plan_force: string, plans: string, country?: string, referrer_token?: string) {
+  const params: create_affiliate_params = {
+    FEED_ID: 26,
+    account_type: account_type,
+    username: username,
+    password: password,
+    email: email,
+    country: country,
+    referrer_token: referrer_token,
+    plans: plans,
+    plan_force: plan_force
+  }
+  const request = await axios.post('feeds.php', {}, {
+    params: params
+  })
+  const data = convertXML(request.data)
+  const output: create_affiliate_output = {
+
+  }
+  return data
+}

@@ -7,6 +7,9 @@ I've used the following references to help me understand the API, from a public 
 # Compatibility Level
 This Module is compatible with the XML API as of 2024-09-01.
 
+# No Real world testing has been completed
+^. Will try to test when I can.
+
 # Supported Functionality and Definition of Done
 - [x] Users
   - [ ] Documentation
@@ -27,11 +30,11 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Documentation
 - [x] Email Validation
   - [ ] Documentation
-- [ ] Player Creation A.K.A (Customer Feed)
+- [x] Player Creation A.K.A (Customer Feed)
   - [ ] Documentation
-- [ ] Player Search
+- [x] Player Search
   - [ ] Documentation
-- [ ] Campaign Creation
+- [x] Campaign Creation
   - [ ] Documentation
 - [ ] Landing Page Creation
   - [ ] Documentation
@@ -43,7 +46,7 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Documentation
   - [ ] Create
   - [ ] Update
-- [ ] Get Current Campaigns
+- [x] Get Current Campaigns
   - [ ] Documentation
 - [x] Get Media Details
   - [ ] Documentation
@@ -51,11 +54,11 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Documentation
 - [ ] Review Affiliate Earnings
   - [ ] Documentation
-- [ ] Create New Affiliate
+- [x] Create New Affiliate
   - [ ] Documentation
-  - [ ] "Shell" account
+  - [x] "Shell" account
   - [ ] Full Account
- - [ ] Create Transactions
+ - [x] Create Transactions
   - [ ] Documentation
-  - [ ] Manual
-  - [ ] Administrative
+  - [x] Manual
+  - [x] Administrative

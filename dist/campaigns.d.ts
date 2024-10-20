@@ -1,17 +1,14 @@
-/**
- * @example
- * const baseUrl = "";
- * const username = "";
- * const password = "";
- * const date_from = new Date(2022, 0, 1);
- * const date_to = new Date(2022, 11, 31);
- *
- * @description This allows you to specify a date range and get all the campaigns that were created within that date range.
- * @param baseUrl
- * @param username
- * @param password
- * @param date_from
- * @param date_to
- * @returns <any>
- */
-export declare function view_campaigns(baseUrl: string, username: string, password: string, date_from: Date, date_to: Date): Promise<any>;
+type create_campaign_output = {
+    tracking_id: number;
+    user_id: number;
+    description: string;
+};
+export declare function view_campaigns(user_id: number, campaign_id: number, metadata?: string, created?: {
+    from: string;
+    to: string;
+}, modified?: {
+    from: string;
+    to: string;
+}): Promise<any>;
+export declare function create_campaign(campaign_id: number, user_id: number, description: string): Promise<create_campaign_output>;
+export {};

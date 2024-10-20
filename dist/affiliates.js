@@ -31,3 +31,22 @@ export async function get_affiliate_earnings(baseUrl, username, password, USER_I
     const affiliate_earnings = parsed_xml;
     return affiliate_earnings;
 }
+export async function create_affiliate(account_type, username, password, email, plan_force, plans, country, referrer_token) {
+    const params = {
+        FEED_ID: 26,
+        account_type: account_type,
+        username: username,
+        password: password,
+        email: email,
+        country: country,
+        referrer_token: referrer_token,
+        plans: plans,
+        plan_force: plan_force
+    };
+    const request = await axios.post('feeds.php', {}, {
+        params: params
+    });
+    const data = convertXML(request.data);
+    const output = {};
+    return data;
+}
