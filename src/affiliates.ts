@@ -1,5 +1,6 @@
 import { createClient } from "./common";
 import { convertXML } from "simple-xml-to-json";
+import fs from 'fs'
 const axios = createClient()
 
 /**
@@ -46,7 +47,16 @@ type create_affiliate_params = {
   plan_force: string
 }
 type create_affiliate_output = {
-
+  user_id: number
+  status: string
+  validation_code: string
+  error_count: number
+  username: string
+  password: string
+  parent_id: number
+  country: string
+  language: string
+  email: string
 }
 
 export async function create_affiliate(account_type: affiliate_account_type, username: string, password: string, email: string, plan_force: string, plans: string, country?: string, referrer_token?: string) {
@@ -64,9 +74,19 @@ export async function create_affiliate(account_type: affiliate_account_type, use
   const request = await axios.post('feeds.php', {}, {
     params: params
   })
+  let output: create_affiliate_output
   const data = convertXML(request.data)
-  const output: create_affiliate_output = {
-
+  output = {
+    status: data.ACCOUNT.STATUS,
+    validation_code: data.ACCOUNT.VALIDATION_CODE,
+    error_count: data.ACCOUNT.children[0].INIT.ERROR_COUNT,
+    username: data.ACCOUNT.children[1].USERNAME.content,
+    password: data.ACCOUNT.children[2].PASSWORD.content,
+    parent_id: data.ACCOUNT.children[3].PARENT.content,
+    user_id: data.ACCOUNT.children[4].USERID.content,
+    country: data.ACCOUNT.children[5].COUNTRY.content,
+    language: data.ACCOUNT.children[6].LANGUAGE.content,
+    email: data.ACCOUNT.children[7].EMAIL.content
   }
   return data
 }

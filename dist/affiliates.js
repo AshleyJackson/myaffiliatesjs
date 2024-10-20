@@ -46,7 +46,19 @@ export async function create_affiliate(account_type, username, password, email, 
     const request = await axios.post('feeds.php', {}, {
         params: params
     });
+    let output;
     const data = convertXML(request.data);
-    const output = {};
+    output = {
+        status: data.ACCOUNT.STATUS,
+        validation_code: data.ACCOUNT.VALIDATION_CODE,
+        error_count: data.ACCOUNT.children[0].INIT.ERROR_COUNT,
+        username: data.ACCOUNT.children[1].USERNAME.content,
+        password: data.ACCOUNT.children[2].PASSWORD.content,
+        parent_id: data.ACCOUNT.children[3].PARENT.content,
+        user_id: data.ACCOUNT.children[4].USERID.content,
+        country: data.ACCOUNT.children[5].COUNTRY.content,
+        language: data.ACCOUNT.children[6].LANGUAGE.content,
+        email: data.ACCOUNT.children[7].EMAIL.content
+    };
     return data;
 }
