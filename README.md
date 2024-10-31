@@ -62,3 +62,5 @@ This Module is compatible with the XML API as of 2024-09-01.
   - [ ] Documentation
   - [x] Manual
   - [x] Administrative
+ - [x] Get Top Commissions by Channel
+ - [x] Get Dashboard Graph Data

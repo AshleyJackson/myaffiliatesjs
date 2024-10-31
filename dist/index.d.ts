@@ -6,4 +6,5 @@ import { get_players, create_player } from "./players";
 import { view_campaigns, create_campaign } from "./campaigns";
 import { create_affiliate } from "./affiliates";
 import { create_transaction } from "./transactions";
-export { decode_token, get_user, validate_email, get_media, get_players, create_player, view_campaigns, create_campaign, create_affiliate, create_transaction, };
+import { get_top_comissions_by_channel, dashboard_graph_data } from "./dashboards";
+export { decode_token, get_user, validate_email, get_media, get_players, create_player, view_campaigns, create_campaign, create_affiliate, create_transaction, get_top_comissions_by_channel, dashboard_graph_data };
