@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { config } from "dotenv";
+
 config();
 
 const creds = {
-  baseUrl: process.env.BASE_URL as string,
-  username: process.env.USERNAME as string,
-  password: process.env.PASSWORD as string,
+  baseUrl: process.env.admin_base as string,
+  username: process.env.admin_username as string,
+  password: process.env.admin_password as string,
 }
 
 if (!creds.baseUrl || !creds.username || !creds.password) {
@@ -14,10 +15,10 @@ if (!creds.baseUrl || !creds.username || !creds.password) {
 
 export const createClient = () => {
   return axios.create({
-    baseURL: creds.baseUrl,
+    baseURL: `https://${creds.baseUrl}/feeds.php`,
     auth: {
       username: creds.username,
-      password: creds.password
+      password: creds.password,
     }
   });
 }

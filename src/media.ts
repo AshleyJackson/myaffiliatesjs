@@ -1,6 +1,5 @@
 import { convertXML } from "simple-xml-to-json";
 import { createClient } from "./common";
-import fs from 'fs'
 
 const axios = createClient()
 
